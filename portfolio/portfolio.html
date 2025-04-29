@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Leonardo San Pietro | IIS Blaise Pascal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+       :root {
+    --primary-blue: #0a192f;
+    --secondary-blue: #172a45;
+    --accent-blue: #64ffda;
+    --white: #e6f1ff;
+    --gray: #8892b0;
+    --dark-gray: #495670;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.6;
+}
+
+.particle {
+    position: absolute;
+    background-color: var(--accent-blue);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.glow {
+    text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+}
+
+header {
+    padding: 2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background-color: rgba(10, 25, 47, 0.8);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo img {
+    height: 40px;
+    transition: transform 0.3s;
+}
+
+.logo:hover img {
+    transform: rotate(15deg);
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    font-family: 'Space Mono', monospace;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav ul li a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+nav ul li a:hover {
+    color: var(--accent-blue);
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-blue);
+    transition: width 0.3s ease-out;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+main {
+    padding-top: 100px;
+}
+
+section {
+    padding: 8rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.hero h2 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    color: var(--accent-blue);
+    margin-bottom: 1.5rem;
+    font-family: 'Space Mono', monospace;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.hero h3 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    color: var(--gray);
+    margin-bottom: 2rem;
+}
+
+.hero p {
+    max-width: 600px;
+    color: var(--gray);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.btn-container {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: transparent;
+    color: var(--accent-blue);
+    border: 1px solid var(--accent-blue);
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-primary {
+    background-color: rgba(100, 255, 218, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(100, 255, 218, 0.1);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent-blue);
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    z-index: -1;
+}
+
+.btn:hover::before {
+    transform: translateX(0);
+}
+
+.btn:hover {
+    color: var(--primary-blue);
+}
+
+.section-title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin-bottom: 4rem;
+    color: var(--white);
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::before {
+    content: '01.';
+    position: relative;
+    margin-right: 1rem;
+    color: var(--accent-blue);
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 300px;
+    height: 1px;
+    background-color: var(--dark-gray);
+    margin-top: 1rem;
+    position: relative;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    color: var(--gray);
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+
+.skill {
+    background-color: var(--secondary-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-family: 'Space Mono', monospace;
+    transition: all 0.3s;
+    border: 1px solid var(--dark-gray);
+}
+
+.skill:hover {
+    transform: translateY(-5px);
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+}
+
+.about-image {
+    position: relative;
+    max-width: 400px;
+    margin-left: auto;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 5px;
+    filter: grayscale(100%) contrast(1);
+    transition: filter 0.5s;
+}
+
+.about-image:hover img {
+    filter: grayscale(0%) contrast(1.1);
+}
+
+.about-image::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--accent-blue);
+    border-radius: 5px;
+    top: 20px;
+    left: 20px;
+    z-index: -1;
+    transition: all 0.3s;
+}
+
+.about-image:hover::after {
+    top: 15px;
+    left: 15px;
+}
+
+#projects {
+    background-color: var(--secondary-blue);
+}
+
+#projects .section-title::before {
+    content: '02.';
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* <-- modificata */
+    gap: 2rem;
+}
+
+.project-card {
+    background-color: var(--primary-blue);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--dark-gray);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px -15px rgba(0, 0, 0, 0.3);
+}
+
+.project-image {
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-info {
+    padding: 2rem;
+}
+
+.project-info h3 {
+    margin-bottom: 1rem;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+.project-info p {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.project-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.project-links a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+}
+
+.project-links a:hover {
+    color: var(--white);
+}
+
+footer {
+    text-align: center;
+    padding: 3rem;
+    background-color: var(--primary-blue);
+    color: var(--gray);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--dark-gray);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.social-links a {
+    color: var(--gray);
+    font-size: 1.5rem;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--accent-blue);
+    transform: translateY(-3px);
+}
+
+.footer-note {
+    font-family: 'Space Mono', monospace;
+    color: var(--accent-blue);
+    margin-top: 1rem;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1.5rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    .hero {
+        padding-top: 80px;
+    }
+
+    .btn-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+
+    .about-image {
+        margin: 0 auto;
+        order: -1;
+        margin-bottom: 3rem;
+    }
+
+    .section-title::after {
+        width: 200px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+ }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Particle background -->
+    <div class="particles" id="particles"></div>
+    
+    <header>
+        <div class="logo">
+            <img src="photos/Logo_pascal_white.png" alt="IIS Blaise Pascal Logo">
+            <h1>Portfolio</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#projects">Esperienze</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h2 class="glow">Ciao, mi chiamo</h2>
+            <h1>Leonardo San Pietro</h1>
+            <h3>Studente di Informatica</h3>
+            <p>Sono uno studente presso l'IIS Blaise Pascal con una passione per lo sviluppo software e l'innovazione tecnologica. Attualmente frequento il quinto anno dell'indirizzo Informatica e Telecomunicazioni.</p>
+            <div class="btn-container">
+                <a href="#projects" class="btn btn-primary">Vedi i miei progetti</a>
+                <a href="#about" class="btn">Scopri di più</a>
+            </div>
+        </section>
+        
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Mi chiamo Leonardo San Pietro, sono nato il 14 agosto 2006 a Reggio Emilia e attualmente frequento il quinto anno dell’indirizzo Informatica presso l’IIS Blaise Pascal.</p>
+                    <p>Durante il mio percorso scolastico ho acquisito competenze in diversi linguaggi di programmazione e tecnologie, partecipando attivamente a numerose esperienze di PCTO che mi hanno permesso di metterle in pratica.</p>
+                    <p>La tecnologia rappresenta una delle mie principali passioni, insieme alla musica e ai viaggi.</p>
+                    <p>Parlo fluentemente italiano, mia lingua madre, e inglese, che utilizzo con sicurezza sia in ambito scritto che orale.</p>
+                    
+                    <h3>Le mie skills:</h3>
+                    <div class="skills">
+                        <div class="skill">C++</div>
+                        <div class="skill">Java</div>
+                        <div class="skill">JavaScript</div>
+                        <div class="skill">HTML/CSS</div>
+                        <div class="skill">PHP</div>
+                        <div class="skill">SQL</div>
+                    </div>
+                </div>
+                <div class="about-image floating">
+                    <img src="photos/profilo2.png" alt="Foto Profilo">
+                </div>
+            </div>
+        </section>
+
+
+        <section id="projects">
+            <h2 class="section-title">Esperienze</h2>
+            <div class="projects-grid">
+        
+                <!-- Esperienza: Mead Informatica -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="photos/mead.jpg" alt="Mead Informatica 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>Mead Informatica</h3>
+                        <h4>A.S 2024-25</h4>
+                        <p>Corso tecnico svolto presso Mead Informatica, incentrato sull’amministrazione di sistemi con un focus su firewall e VPN. Il programma ha approfondito la configurazione di dispositivi di sicurezza di rete, l’implementazione di VPN e la gestione delle politiche di filtraggio. La formazione ha incluso sessioni pratiche su firewall Cisco.</p>
+                        <p>Totale: 3 ore</p>
+                    </div>
+                </div>
+        
+                <!-- Esperienza: Polarity -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="photos/polarity.jpg" alt="Polarity 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>Polarity</h3>
+                        <h4>A.S 2024-25</h4>
+                        <p>Percorso formativo focalizzato sul ciclo di vita di un progetto software, con attenzione alle metodologie di sviluppo e agli strumenti utilizzati dai professionisti del settore. Durante le lezioni, sono stati analizzati casi reali tratti da progetti sviluppati da Polarity per clienti aziendali, illustrando fasi come la raccolta requisiti, la progettazione, lo sviluppo, il testing e il rilascio.</p>
+                        <p>Totale: 6 ore</p>
+                    </div>
+                </div>
+        
+                <!-- Esperienza: IFOA -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="photos/ifoa.jpg" alt="IFOA 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>Progetto Cybersecurity</h3>
+                        <h4>A.S 2024-25</h4>
+                        <p>Formazione in ambito cybersicurezza svolto con IFOA (RE) con approfondimenti su concetti come la gestione delle vulnerabilità, tecniche di difesa attiva e passiva, gestione degli incidenti e aspetti normativi come il GDPR.</p>
+                        <p>Totale: 16 ore</p>
+                    </div>
+                </div>
+        
+                <!-- Esperienza: Restituzione stage -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="photos/bus.jpg" alt="Restituzione Stage 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>Restituzione stage</h3>
+                        <h4>A.S 2024-25</h4>
+                        <p>Al termine del periodo di stage svolto presso LITOKOL Spa, è stata realizzata una presentazione conclusiva rivolta alla scuola per illustrare il percorso formativo intrapreso in azienda. Durante l'esposizione sono state condivise le competenze tecniche e trasversali acquisite, le attività svolte in ambito lavorativo e i principali risultati raggiunti.</p>
+                        <p>Totale: 2 ore</p>
+                    </div>
+                </div>
+        
+                <!-- Esperienza: Stage in azienda -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="photos/stage/stageMain.jpg" alt="Stage in azienda 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>Stage in azienda</h3>
+                        <h4>A.S 2023-24</h4>
+                        <p>Durante l’esperienza di stage presso LITOKOL Spa sono stato coinvolo in attività tecniche e gestionali all'interno del reparto IT. Le mansioni hanno incluso interventi di manutenzione sulla rete aziendale interna, gestione e aggiornamento di database, oltre al supporto nell’utilizzo e nella configurazione di diversi applicativi aziendali.
+                            L’attività ha rappresentato un'importante occasione per applicare competenze informatiche in un contesto professionale reale.</p>
+                        <p>Totale: 120 ore</p>
+                    </div>
+                </div>
+
+                <!-- Esperienza: Monta Smonta -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="photos/montasmonta.jpg" alt="Monta Smonta">
+                    </div>
+                    <div class="project-info">
+                        <h3>Progetto "Monta-Smonta"</h3>
+                        <h4>A.S 2022-23</h4>
+                        <p>Attraverso questo progetto è stato possibile consolidare le competenze pratiche sulla componentistica hardware di un PC. Ogni studente ha smontato completamente un computer, estraendo e analizzando ciascun componente singolarmente, per poi procedere al rimontaggio corretto all’interno del case.
+                            L’attività ha permesso di osservare nel dettaglio il collegamento tra i vari elementi e comprendere meglio la struttura fisica di un sistema informatico.</p>
+                        <p>Totale: 3 ore</p>
+                    </div>
+                </div>
+
+                <!-- Esperienza: Wimore Linux -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="photos/wimore.jpg" alt="Wimore">
+                    </div>
+                    <div class="project-info">
+                        <h3>Corso Linux</h3>
+                        <h4>A.S 2022-23</h4>
+                        <p>Nel corso di una settimana, tre esperti e dipendenti dell’azienda WiMORE hanno tenuto un corso formativo di 15 ore dedicato alle basi del sistema operativo Linux. Il programma ha incluso comandi fondamentali, struttura del file system, gestione degli utenti e delle autorizzazioni, oltre ad aspetti pratici come l’accesso remoto a sistemi esterni.
+                            Il corso ha rappresentato un’opportunità per consolidare conoscenze pregresse e approfondire l’utilizzo professionale dell’ambiente Linux.</p>
+                        <p>Totale: 15 ore</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
